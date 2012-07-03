@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+	About:
+		The following is a codeless language module (CLM) for objective-J and Cappuccino written to work with BBEdit 10.1. It may work with earlier versions and/or TextWrangler as well.
+		
+		The setting define syntax highlighting for objective-J files with the .j file extension. Object-J language keywords, Cappuccino classes, and many Cappuccino functions are recognized. In addition, a regular expression identifies methods declarations so as to include them in the function pop-up.
+		
+	Installation:
+		Place a copy of this file in /Users/<your username>/Library/Application Support/BBEdit/Language Modules/
+		
+		In 10.7 (and presumably later versions of OS X) the user's Library folder is hidden by default in the Finder. One can access the folder using the 'Go to Folder…' command located in Finder's Go menu or executing the following in Terminal:
+		
+		open -a Finder ~/Library
+		
+	Issues:
+		Please report questions or problems to: https://github.com/knutecht/Obj-J-Colors-for-BBEdit
+			
+	By:
+		Kyle Utecht
+		
+-->
+
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
