@@ -514,27 +514,36 @@
 		<dict>
 			<key>Identifier and Keyword Characters</key> <string>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz@</string>
 			<key>Function Pattern</key> <string>
-			(?x: 
-				(?P&lt;leadspace&gt;^\s*)
-				(?P&lt;function&gt;
-					(?P&lt;function_name&gt;
-						(-|\+)\s*				(?# - or +)
-						\([a-zA-Z_]+\)\s*		(?# return type)
-						(
-							[a-zA-Z_1-9]+:\([a-zA-Z_]+\)[a-zA-Z_1-9]+(\s+[a-zA-Z_1-9]+:\([a-zA-Z_]+\)[a-zA-Z_1-9]+)+ |	(?# >1 arguments)
-							[a-zA-Z_1-9]+:\([a-zA-Z_]+\)[a-zA-Z_1-9]+ |		(?# one arguments)
-							[a-zA-Z_1-9]+			(?# no argument)
-						)
+				(?x:
+					(?P&lt;leadspace&gt;^\s*)
+					(?P&lt;function&gt;
+						(?P&lt;function_name&gt;
+							( (?# method declaration)
+								(-|\+)\s*				(?# - or +)
+								\([a-zA-Z_]+\)\s*		(?# return type)
+								(
+									[a-zA-Z_1-9]+:\([a-zA-Z_]+\)[a-zA-Z_1-9]+(\s+[a-zA-Z_1-9]+:\([a-zA-Z_]+\)[a-zA-Z_1-9]+)+ |	(?# &gt;1 arguments)
+									[a-zA-Z_1-9]+:\([a-zA-Z_]+\)[a-zA-Z_1-9]+ |		(?# one arguments)
+									[a-zA-Z_1-9]+			(?# no argument)
+								)
+							) 
+							|
+							( (?# implementation)
+								@implementation\s+\w+\s+:\s+\w+
+							)
+							|
+							( (?# pragma marks)
+								(
+									(?-x)#pragma mark \w*(?x)
+								)
+								|
+								(
+									(?-x)#PRAGMA MARK \w*(?x)
+								)
+							)
+						)		
 					)
-					\s+								(?# whitespace after declaration)
-					(
-						(//.*$)        |    (?# Line comment)
-						(?s:/\*.*?\*/)      (?# Block comment)
-					)?
-					\s*								(?# optional whitespace after comment)
-					\{								(?# start of method implementation)
 				)
-			)
 			</string>
 			<key>Skip Pattern</key> <string>((?P&gt;comment)|(?P&gt;string)|.*\r)</string>
 			<key>Comment Pattern</key> <string>
